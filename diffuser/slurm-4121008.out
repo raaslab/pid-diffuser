@@ -1,0 +1,82 @@
+[ utils/setup ] Reading config: config.maze2d:pointmaze_opendense_v2
+[ utils/setup ] Not using overrides | config: config.maze2d | dataset: pointmaze_opendense_v2
+[ utils/setup ] Setting exp_name to: values/defaults_H128_T64
+[ utils/setup ] Saved args to logs/pointmaze_opendense_v2/values/defaults_H128_T64/args.json
+[ utils/config ] Imported diffuser.datasets:ValueDataset
+
+[utils/config ] Config: <class 'diffuser.datasets.sequence.ValueDataset'>
+    discount: 0.99
+    env: pointmaze_opendense_v2
+    horizon: 128
+    max_path_length: 40000
+    normalizer: LimitsNormalizer
+    preprocess_fns: ['maze2d_set_terminals']
+    termination_penalty: -100
+    use_padding: False
+
+[ utils/config ] Saved config to: logs/pointmaze_opendense_v2/values/defaults_H128_T64/dataset_config.pkl
+
+[ utils/config ] Imported diffuser.utils:Maze2dRenderer
+
+[utils/config ] Config: <class 'diffuser.utils.rendering.Maze2dRenderer'>
+    env: pointmaze_opendense_v2
+
+[ utils/config ] Saved config to: logs/pointmaze_opendense_v2/values/defaults_H128_T64/render_config.pkl
+
+fn_name: ['maze2d_set_terminals']
+environment
+pointmaze_opendense_v2
+Goal: [-1.93167884 -0.76141917]
+[ utils/preprocessing ] Segmented pointmaze_opendense_v2 | 1889 paths | min length: 9 | max length: 3358
+[ datasets/buffer ] Finalized replay buffer | 1890 episodes
+[ datasets/buffer ] Fields:
+    actions: (1890, 40000, 2)
+    terminals: (1890, 40000, 1)
+    timeouts: (1890, 40000, 1)
+    observations: (1890, 40000, 4)
+    rewards: (1890, 40000, 1)
+    normed_observations: (1890, 40000, 4)
+    normed_actions: (1890, 40000, 2)
+[ utils/config ] Imported diffuser.models:TemporalValue
+
+[utils/config ] Config: <class 'diffuser.models.temporal.TemporalValue'>
+    cond_dim: 4
+    dim_mults: (1, 4, 8)
+    horizon: 128
+    transition_dim: 4
+
+[ utils/config ] Saved config to: logs/pointmaze_opendense_v2/values/defaults_H128_T64/model_config.pkl
+
+[ utils/config ] Imported diffuser.models:ValueDiffusion
+
+[utils/config ] Config: <class 'diffuser.models.diffusion.ValueDiffusion'>
+    action_dim: 0
+    horizon: 128
+    loss_type: value_l2
+    n_timesteps: 64
+    observation_dim: 4
+
+[ utils/config ] Saved config to: logs/pointmaze_opendense_v2/values/defaults_H128_T64/diffusion_config.pkl
+
+
+[utils/config ] Config: <class 'diffuser.utils.training.Trainer'>
+    bucket: None
+    ema_decay: 0.995
+    gradient_accumulate_every: 2
+    label_freq: 80000
+    n_reference: 8
+    results_folder: logs/pointmaze_opendense_v2/values/defaults_H128_T64
+    sample_freq: 0
+    save_freq: 1000
+    save_parallel: False
+    train_batch_size: 32
+    train_lr: 0.0002
+
+[ utils/config ] Saved config to: logs/pointmaze_opendense_v2/values/defaults_H128_T64/trainer_config.pkl
+
+[(4, 32), (32, 128), (128, 256)]
+Testing forward... ✓
+Epoch 0 / 40 | logs/pointmaze_opendense_v2/values/defaults_H128_T64
+srun: Job step aborted: Waiting up to 302 seconds for job step to finish.
+slurmstepd: error: *** JOB 4121008 ON tron63 CANCELLED AT 2025-04-21T10:30:45 ***
+slurmstepd: error: *** STEP 4121008.0 ON tron63 CANCELLED AT 2025-04-21T10:30:45 ***
